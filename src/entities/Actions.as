@@ -14,7 +14,10 @@ package entities
 
 	public function advanceActions():void {
 	    actionsIndex++;
-	    FP.console.log(actionsIndex);
+	}
+
+	public function act():void {
+	    FP.console.log("Act on index: " + actionsIndex);
 	}
     }
 }

@@ -7,6 +7,10 @@ package entities
     public class DialogueBox extends Entity {
 	private static const
 	    PRINT_INTERVAL:Number = 0.1;
+
+	public var
+	    actions:Actions;
+
 	private var 
 	    text:Text,
 	    textArray:Array,
@@ -14,7 +18,7 @@ package entities
 	    currentWord:String,
 	    currentChar:Number,
 	    lastPrint:Number;
-	
+
 	public function DialogueBox():void {
 	    super();
 
@@ -51,8 +55,13 @@ package entities
 	    lastPrint = 0;
 	    currentChar++;
 		    
-	    if (currentChar > currentWord.length-1) { printing = false; }
-	    else { concatCharactersToDialogue(); }
+	    if (currentChar > currentWord.length-1) { 
+		printing = false;
+		actions.act();
+	    }
+	    else { 
+		concatCharactersToDialogue(); 
+	    }
 	}
 
 	private function concatCharactersToDialogue():void {

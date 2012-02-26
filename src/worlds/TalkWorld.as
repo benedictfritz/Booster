@@ -16,11 +16,13 @@ package worlds
 	
 	public function TalkWorld():void {
 	    super();
-	    dialogueBox = new DialogueBox();
-	    add(dialogueBox);
 
 	    actions = new Actions();
 	    add(actions);
+
+	    dialogueBox = new DialogueBox();
+	    dialogueBox.actions = actions;
+	    add(dialogueBox);
 	}
 
 	override public function update():void {
@@ -30,5 +32,6 @@ package worlds
 		actions.advanceActions();
 	    }
 	}
+
     }
 }

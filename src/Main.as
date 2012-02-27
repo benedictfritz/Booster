@@ -5,12 +5,11 @@ package
 
     import worlds.*;
 
-    [SWF(width="640", height="380")]
+    [SWF(width="640", height="100")]
 
     public class Main extends Engine {
 	public function Main() {
-	    super(640, 380, 60, false);
-	    FP.console.enable();
+	    super(640, 100, 60, false);
 	    FP.world = new TalkWorld();
 	}
     }

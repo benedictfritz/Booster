@@ -1,10 +1,38 @@
 package entities
 {
     import net.flashpunk.FP;
+    import net.flashpunk.Sfx;
     import net.flashpunk.Entity;
     import net.flashpunk.graphics.Text;
 
     public class DialogueBox extends Entity {
+	[Embed(source='../../assets/sounds/1.mp3')]
+	    private var SOUND1:Class;
+	[Embed(source='../../assets/sounds/2.mp3')]
+	    private var SOUND2:Class;
+	[Embed(source='../../assets/sounds/3.mp3')]
+	    private var SOUND3:Class;
+	[Embed(source='../../assets/sounds/4.mp3')]
+	    private var SOUND4:Class;
+	[Embed(source='../../assets/sounds/5.mp3')]
+	    private var SOUND5:Class;
+	[Embed(source='../../assets/sounds/6.mp3')]
+	    private var SOUND6:Class;
+	[Embed(source='../../assets/sounds/7.mp3')]
+	    private var SOUND7:Class;
+	[Embed(source='../../assets/sounds/8.mp3')]
+	    private var SOUND8:Class;
+	[Embed(source='../../assets/sounds/9.mp3')]
+	    private var SOUND9:Class;
+	[Embed(source='../../assets/sounds/10.mp3')]
+	    private var SOUND10:Class;
+	[Embed(source='../../assets/sounds/11.mp3')]
+	    private var SOUND11:Class;
+	[Embed(source='../../assets/sounds/12.mp3')]
+	    private var SOUND12:Class;
+	[Embed(source='../../assets/sounds/13.mp3')]
+	    private var SOUND13:Class;
+
 	private static const
 	    PRINT_INTERVAL:Number = 0.1;
 
@@ -14,10 +42,14 @@ package entities
 	    printing:Boolean,
 	    currentWord:String,
 	    currentChar:Number,
-	    lastPrint:Number;
+	    lastPrint:Number,
+	    soundsArray:Array,
+	    theEnd:Boolean;
 
 	public function DialogueBox(width:Number, height:Number):void {
 	    super();
+
+	    theEnd = false;
 
 	    textArray = 
 		new Array(
@@ -56,7 +88,7 @@ package entities
 			  "My silicon heart quivers...",
 			  "As the shockwaves of your pistol blast...",
 			  "Reverberate through the very fabric...",
-			  "Of our universe...",
+			  "Of our shared universe...",
 			  "Your equally beefy comrades...",
 			  "Turn their heads towards...",
 			  "Your immaculately chiseled abs...",
@@ -95,6 +127,11 @@ package entities
 	    text.color = 0x00FF00;
 	    graphic = text;
 
+	    soundsArray = new Array(new Sfx(SOUND1), new Sfx(SOUND2), new Sfx(SOUND3),
+				    new Sfx(SOUND4), new Sfx(SOUND5), new Sfx(SOUND6),
+				    new Sfx(SOUND7), new Sfx(SOUND8), new Sfx(SOUND9),
+				    new Sfx(SOUND10), new Sfx(SOUND11), 
+				    new Sfx(SOUND12), new Sfx(SOUND13));
 	    printing = false;
 	    advanceText();
 	}
@@ -108,17 +145,23 @@ package entities
 	}
 
 	public function advanceText():void {
+	    if (theEnd) { return; }
+
 	    if (!printing) {
 		printing = true;
 		currentWord = textArray.pop();
 		currentChar = -1;
 		lastPrint = PRINT_INTERVAL;
 		text.text = "";
+
+		if (currentWord == null) {
+		    theEnd = true;
+		}
 	    }
-	    else {
-		printing = false;
-		text.text = currentWord;
-	    }
+	    // else {
+	    // 	printing = false;
+	    // 	text.text = currentWord;
+	    // }
 	}
 
 	private function continuePrinting():void {
@@ -135,6 +178,10 @@ package entities
 
 	    currText = currText.concat(nextChar);
 	    text.text = currText;
+
+	    var randomSoundIndex:Number = Math.floor(FP.random * 13);
+	    var randomSound:Sfx = soundsArray[randomSoundIndex];
+	    randomSound.play();
 	}
 
     }

@@ -17,10 +17,10 @@ package worlds
 	public function TalkWorld():void {
 	    super();
 
-	    actions = new Actions();
+	    actions = new Actions(FP.width, FP.height/3);
 	    add(actions);
 
-	    dialogueBox = new DialogueBox();
+	    dialogueBox = new DialogueBox(FP.width, FP.height/3 * 2);
 	    dialogueBox.actions = actions;
 	    add(dialogueBox);
 	}

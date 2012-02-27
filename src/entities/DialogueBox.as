@@ -19,13 +19,13 @@ package entities
 	    currentChar:Number,
 	    lastPrint:Number;
 
-	public function DialogueBox():void {
+	public function DialogueBox(width:Number, height:Number):void {
 	    super();
 
 	    textArray = new Array("", "Hello there player...", "Oh my... you seem quite average.", "Let's see if we can do something about that...", "Are you more of a space marine... or a powerful wizard?");
 	    textArray.reverse();
 
-	    text = new Text(textArray.pop(), 0, 0, FP.width, FP.height/3);
+	    text = new Text(textArray.pop(), 0, 0, width, height);
 	    text.wordWrap = true;
 	    text.size = 45;
 	    graphic = text;
